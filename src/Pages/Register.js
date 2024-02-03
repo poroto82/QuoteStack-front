@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import { useAuth } from '../Hooks/useAuth'
 import { Box, Input, Button, Link, Stack, Text } from '@chakra-ui/react'
 
@@ -50,7 +49,7 @@ function RegisterPage() {
               placeholder="Email"
               label="Email"
               variant="outline"
-
+              type='email'
               onChange={(e) => setFormState({ ...formState, email: e.target.value })}
             />
             <Input
@@ -69,7 +68,7 @@ function RegisterPage() {
 
               onChange={(e) => setFormState({ ...formState, password: e.target.value })}
             />
-            <Button type="submit" variant="solid">
+            <Button type="submit" colorScheme='blue' variant="solid">
               Register
             </Button>
           </Stack>

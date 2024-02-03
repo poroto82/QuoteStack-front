@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import { PublicLayout } from './Layouts/PublicLayout'
 import { ProtectedLayout } from './Layouts/ProtectedLayout'
-import HomePage from './Pages/Home'
 import LoginPage from './Pages/Login'
 import RegisterPage from './Pages/Register'
+import TodayPage from './Pages/Today'
 
 function App() {
   return (
@@ -15,8 +15,7 @@ function App() {
       </Route>
 
       <Route path='/'  element={<ProtectedLayout />}>
-        <Route path='/' element={<HomePage />} />
-       
+        <Route path="today" element={<TodayPage />} />
       </Route>
     </Routes>
   )

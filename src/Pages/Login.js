@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../Hooks/useAuth'
-import { Box, Text, Input, Button  } from '@chakra-ui/react'
+import { Box, Input, Button, Link, Stack, Text } from '@chakra-ui/react'
 
 function LoginPage() {
   const [formState, setFormState] = useState({
@@ -16,59 +16,56 @@ function LoginPage() {
   }
 
   return (
+    <Box
+    display="flex"
+    flexDirection="column"
+    justifyContent="center"
+    alignItems="center"
+    height="100vh"
+    bg="#f5f5f5"
+  >
+    <Text fontSize='6xl'>myQuotes</Text>
+    <form onSubmit={onSubmit}>
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        height="100vh"
-        bgcolor="#f5f5f5"
+        width="400px"
+        height="400px"
+        bg="white"
+        borderRadius="10px"
+        boxShadow="0 0 10px 0 rgba(0,0,0,0.2)"
       >
-        <Text variant="h1">oQuery</Text>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          component="form"
-          onSubmit={onSubmit}
-          width="400px"
-          height="400px"
-          bgcolor="white"
-          borderRadius="10px"
-          boxShadow="0 0 10px 0 rgba(0,0,0,0.2)"
-        >
-          <Input 
-            id="outlined-basic"
+        <Stack spacing={3}>
+          <Input
+            placeholder="Email"
             label="Email"
-            variant="outlined"
-            margin="normal"
-            sx={{ width: '70%' }}
-            onChange={(e) =>
-              setFormState({ ...formState, email: e.target.value })
-            }
+            type='email'
+            variant="outline"
+
+            onChange={(e) => setFormState({ ...formState, email: e.target.value })}
           />
-          <Input 
-            id="outlined-basic"
+          <Input
+            placeholder="Password"
             label="Password"
             type={'password'}
-            variant="outlined"
-            margin="normal"
-            sx={{ width: '70%' }}
-            onChange={(e) =>
-              setFormState({ ...formState, password: e.target.value })
-            }
+            variant="outline"
+
+            onChange={(e) => setFormState({ ...formState, password: e.target.value })}
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ width: '70%', margin: '1rem' }}
-          >
+         
+          <Button type="submit" colorScheme='blue' variant="solid">
             Login
           </Button>
-        </Box>
+        </Stack>
+        <Link mt="4" href="/register">
+          Need an account? Register
+        </Link>
+
       </Box>
+    </form>
+  </Box>
   )
 }
 
