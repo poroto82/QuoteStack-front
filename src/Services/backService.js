@@ -14,11 +14,9 @@ axios.interceptors.response.use(
       navigate("/", { replace: true });
       // Realizar alguna acción, como redirigir al usuario a la página de inicio de sesión
     }
-
     return Promise.reject(error);
   }
 );
-
 
 export function setAuthToken(token) {
   if (token) {
@@ -28,7 +26,11 @@ export function setAuthToken(token) {
   }
 }
 
-
 export function getRandomQuote() {
   return axios.get(apiUrl + '/quotes/random');
 }
+
+export function getQuotes() {
+  return axios.get(apiUrl + '/quotes');
+}
+

@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
       const response = await loginUser(data);
       if (response.status === 200) {
         setUser(response.data.access);
-        navigate("/home", { replace: true });
+        navigate("/today", { replace: true });
       }
     }
     catch(error){
@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
       const response = await registerUser(data);
       if (response.status === 200) {
         setUser(response.data);
-        navigate("/home", { replace: true });
+        navigate("/today", { replace: true });
       }
     }
     catch(error){

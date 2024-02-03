@@ -1,19 +1,19 @@
 import React, { useEffect, useState, memo, useContext, useRef, useCallback } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import { useToast } from "@chakra-ui/react";
-import { getRandomQuote } from "../Services/backService";
+import { getQuotes } from "../Services/backService";
 import QuoteCard from "../Components/Quote/Quote";
 
-const TodayPage = () => {
+const QuotesPage = () => {
   const { user } = useAuth()
   const toast = useToast()
 
-  const [quote, setQuote] = useState({})
+  const [quotes, setQuotes] = useState([])
 
-  const randomQuote = async () => {
+  const gquotes = async () => {
     try{
-      const quoteRta = await getRandomQuote()
-      setQuote(quoteRta.data[0])
+      const quoteRta = await getQuotes()
+      setQuotes(quoteRta.data)
     }
     catch(error){
       toast({
@@ -25,13 +25,15 @@ const TodayPage = () => {
   }
 
   useEffect(() => {
-    randomQuote()
+    gquotes()
 
   }, [])
 
   return (
-   <QuoteCard quote={quote}></QuoteCard>
+    quotes.map(function (i) {
+      return <QuoteCard quote={i}></QuoteCard>;
+    })
   );
 };
 
-export default TodayPage;
+export default QuotesPage;
