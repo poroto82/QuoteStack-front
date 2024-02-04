@@ -32,8 +32,8 @@ const QuotesPage = () => {
 
   return (
     <>
-      {quotes.map(function (i) {
-        return <QuoteCard quote={i}></QuoteCard>;
+      {quotes.map(function (i,idx) {
+        return <QuoteCard key={idx} quote={i}></QuoteCard>;
       })}
       <Box
         onClick={()=>{gquotes(true); setRefresh(!refresh);}}

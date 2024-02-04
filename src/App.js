@@ -8,6 +8,7 @@ import TodayPage from './Pages/Today'
 import QuotesPage from './Pages/Quotes'
 import SecureQuotesPage from './Pages/SecureQuotes'
 import { useAuth } from './Hooks/useAuth';
+import FavouriteQuotesPage from './Pages/FavouriteQuotes';
 
 function App() {
   const { user } = useAuth();
@@ -23,11 +24,12 @@ function App() {
         <Route path="today" element={<TodayPage />} />
         <Route path="quotes" element={<QuotesPage />} />
         <Route path="secure-quotes" element={(user) ?  <SecureQuotesPage /> : <Navigate to="/quotes" />} />
+        <Route path="favorite-quotes" element={(user) ?  <FavouriteQuotesPage /> : <Navigate to="/quotes" />} />
       </Route>
 
       {/* <Route path='/'  element={<ProtectedLayout />}>
         
-        <Route path="favorite-quotes" element={<TodayPage />} />
+        
         <Route path="report-favorite-quotes" element={<TodayPage />} />
       </Route> */}
 

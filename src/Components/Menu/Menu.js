@@ -17,7 +17,7 @@ export function Menu() {
                     <Link href="/today">Quote of the day</Link>
                     <Link href="/quotes">Five Random Quotes</Link>
                     <Link href="/secure-quotes">Ten Secure Quotes</Link>
-                    <Link href="/favorite-quotes”">Favourite Quotes</Link>
+                    <Link href="/favorite-quotes">Favourite Quotes</Link>
                     <Link href="/report-favorite-quotes">Report of favourite Quotes</Link>
                 </HStack>
             </Box>

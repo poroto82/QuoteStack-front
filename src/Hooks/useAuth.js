@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../Services/authService";
 import { useLocalStorage } from "./useLocalStorage";
 import { useToast } from '@chakra-ui/react';
+import { setAuthToken } from '../Services/backService';
 
 
 
@@ -20,7 +21,7 @@ export function AuthProvider({ children }) {
     try{
       const response = await loginUser(data);
       if (response.status === 200) {
-        setUser(response.data.access);
+        setUser(response.data);
         navigate("/today", { replace: true });
       }
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, memo, useContext, useRef, useCallback } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import { Box, Button, useToast } from "@chakra-ui/react";
-import { getQuotes } from "../Services/backService";
+import { getQuotes, setAuthToken } from "../Services/backService";
 import QuoteCard from "../Components/Quote/Quote";
 
 const SecureQuotesPage = () => {
@@ -26,6 +26,7 @@ const SecureQuotesPage = () => {
   }
 
   useEffect(() => {
+    setAuthToken(user.token)
     getSecureQuotes()
 
   }, [refresh])
