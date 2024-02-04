@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Text} from "@chakra-ui/react";
-import { AddIcon, CheckIcon } from "@chakra-ui/icons";
+import { AddIcon, CheckIcon, MinusIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../Hooks/useAuth";
-import { saveUserQuote, setAuthToken } from "../../Services/backService";
+import { deleteUserQuote, saveUserQuote, setAuthToken } from "../../Services/backService";
 
-const QuoteCard = ({quote, addToFav = true}) => {
+const QuoteCard = ({quote, addToFav = true, deleteFav = false, setRefresh }) => {
   const { user } = useAuth()
 
   const [saved, setSaved] = useState(false)
@@ -13,6 +13,12 @@ const QuoteCard = ({quote, addToFav = true}) => {
     setAuthToken(user.token)
     await saveUserQuote(quote)
     setSaved(true)
+  }
+
+  const deleteFavouriteQuote = async () =>{
+    setAuthToken(user.token)
+    await deleteUserQuote(quote.id)
+    setRefresh(quote.id)
   }
 
   return (
@@ -27,15 +33,17 @@ const QuoteCard = ({quote, addToFav = true}) => {
         <Text>{quote.cached ? ' [CACHE] ' : ''}{quote.text}</Text>
         <Text as='b'>{quote.author}</Text>
       </CardBody>
-      {user && addToFav &&
+      {user  &&
       <CardFooter >
         {
-          !saved && <Button onClick={saveFavouriteQuote} size="sm"><AddIcon></AddIcon> Add to my Favs</Button>
+          addToFav && !saved && <Button onClick={saveFavouriteQuote} size="sm"><AddIcon></AddIcon> Add to my Favs</Button>
         }
         {
-          saved && <CheckIcon /> 
+          addToFav && saved && <CheckIcon /> 
         }
-        
+        {
+          deleteFav && <Button onClick={deleteFavouriteQuote} size="sm"><MinusIcon></MinusIcon> Delete from Favs</Button>
+        }
       </CardFooter>}
     </Card>
     </Box>

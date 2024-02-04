@@ -5,11 +5,6 @@ import { Container } from "@chakra-ui/react";
 
 
 export function PublicLayout() {
-  // const { user } = useAuth();
-
-  // // if (user) {
-  // //   return <Navigate to="/" />;
-  // // }
 
   return <>
     <Menu />

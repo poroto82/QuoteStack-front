@@ -9,6 +9,7 @@ const FavouriteQuotesPage = () => {
   const toast = useToast()
 
   const [quotes, setQuotes] = useState([])
+  const [refresh, setRefresh] = useState(0)
   
   const getSecureQuotes = async () => {
     try{
@@ -35,12 +36,12 @@ const FavouriteQuotesPage = () => {
     setAuthToken(user.token)
     getSecureQuotes()
 
-  }, [])
+  }, [refresh])
 
   return (
     <>
     {quotes.map(function (i, idx) {
-      return <QuoteCard key={idx} quote={i} addToFav={false}></QuoteCard>;
+      return <QuoteCard key={idx} deleteFav={true} setRefresh={setRefresh} quote={i} addToFav={false}></QuoteCard>;
     })}
     </>
   );

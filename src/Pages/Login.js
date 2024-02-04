@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../Hooks/useAuth'
 import { Box, Input, Button, Link, Stack, Text } from '@chakra-ui/react'
+import { useLocation } from 'react-router-dom'
 
 function LoginPage() {
   const [formState, setFormState] = useState({
@@ -14,6 +15,11 @@ function LoginPage() {
     e.preventDefault()
     login(formState)
   }
+
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const query = useQuery();
+  const email = query.get('email');
+
 
   return (
     <Box
@@ -43,7 +49,7 @@ function LoginPage() {
             label="Email"
             type='email'
             variant="outline"
-
+            value={email}
             onChange={(e) => setFormState({ ...formState, email: e.target.value })}
           />
           <Input

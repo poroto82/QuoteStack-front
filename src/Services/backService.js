@@ -51,3 +51,11 @@ export function saveUserQuote(quote){
   return axios.post(apiUrl + '/user/quotes',quote)
 }
 
+export function deleteUserQuote(idQuote){
+  return axios.delete(apiUrl + '/user/quotes/' + idQuote)
+}
+
+
+export function getUsersAndQuotes(){
+  return axios.get(apiUrl + '/users')
+}
