@@ -8,8 +8,8 @@ const TableQuotes = ({ quotes, sameUser, deleteQuote }) => {
             <TableContainer>
                 <Table size="lg" variant='striped'>
                     <Tbody>
-                        {quotes.map(function (q) {
-                            return <Tr>
+                        {quotes.map(function (q,idx) {
+                            return <Tr key={idx}>
                                 <Td colSpan={3}>{q.text}</Td>
                                 <Td>{sameUser && <Button onClick={() => deleteQuote(q.id)}>Delete</Button>}</Td>
                             </Tr>

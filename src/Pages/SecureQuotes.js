@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import { Box, Button, useToast } from "@chakra-ui/react";
 import { getQuotes, setAuthToken } from "../Services/backService";
@@ -11,7 +11,7 @@ const SecureQuotesPage = () => {
   const [quotes, setQuotes] = useState([])
   const [refresh, setRefresh] = useState(false)
 
-  const getSecureQuotes = async (forceRefresh) => {
+  const getSecureQuotes = useCallback(async (forceRefresh) => {
     try{
       const quoteRta = await getQuotes(forceRefresh,10)
       setQuotes(quoteRta.data)
@@ -23,13 +23,13 @@ const SecureQuotesPage = () => {
         isClosable: true,
       })
     }
-  }
+  },[setQuotes, toast])
 
   useEffect(() => {
     setAuthToken(user.token)
     getSecureQuotes()
 
-  }, [refresh])
+  }, [getSecureQuotes, user.token])
 
   return (
     <>

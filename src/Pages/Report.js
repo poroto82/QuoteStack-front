@@ -1,5 +1,5 @@
 import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { deleteUserQuote, getUsersAndQuotes, setAuthToken } from "../Services/backService"
 import { useAuth } from "../Hooks/useAuth"
 import { Link } from "react-router-dom"
@@ -10,11 +10,10 @@ const ReportPage = () => {
     const [users, setUsers] = useState([])
     const [refresh, setRefresh] = useState(0)
     
-
-    const getData = async () => {
+    const getData = useCallback(async () => {
         const rta = await getUsersAndQuotes()
         setUsers(rta.data)
-    }
+    },[setUsers])
 
     const deleteQuote = async (id) => {
         await deleteUserQuote(id)
@@ -24,7 +23,7 @@ const ReportPage = () => {
     useEffect(() => {
         setAuthToken(user.token)
         getData()
-    }, [refresh])
+    }, [getData, user.token, refresh])
 
 
     return (
@@ -34,8 +33,8 @@ const ReportPage = () => {
             p="5"
         >
             <Accordion>
-                {users.map(function (u) {
-                    return <AccordionItem>
+                {users.map(function (u,idx) {
+                    return <AccordionItem key={idx}>
                         <h2>
                             <AccordionButton>
                                 <Box as="span" flex='1' textAlign='left'>
