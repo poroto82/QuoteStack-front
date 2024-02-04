@@ -1,6 +1,6 @@
-import React, { useEffect, useState, memo, useContext, useRef, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
-import { Box, Button, useToast } from "@chakra-ui/react";
+import {  useToast } from "@chakra-ui/react";
 import { getUserQuotes, setAuthToken } from "../Services/backService";
 import QuoteCard from "../Components/QuoteCard/QuoteCard";
 
@@ -15,7 +15,7 @@ const FavouriteQuotesPage = () => {
     try{
       const quoteRta = await getUserQuotes()
       setQuotes(quoteRta.data)
-      if (quoteRta.data.length == 0){
+      if (quoteRta.data.length === 0){
         toast({
           title: "You don't have favourites",
           status: 'info'

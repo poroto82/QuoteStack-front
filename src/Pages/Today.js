@@ -1,17 +1,15 @@
-import React, { useEffect, useState, memo, useContext, useRef, useCallback } from "react";
-import { useAuth } from "../Hooks/useAuth";
+import React, { useEffect, useState, useCallback } from "react";
 import { Box, Button, useToast } from "@chakra-ui/react";
 import { getRandomQuote } from "../Services/backService";
 import QuoteCard from "../Components/QuoteCard/QuoteCard";
 
 const TodayPage = () => {
-  const { user } = useAuth()
   const toast = useToast()
 
   const [quote, setQuote] = useState({})
   const [refresh, setRefresh] = useState(false)
 
-  const randomQuote = async (forceRefresh) => {
+  const randomQuote = useCallback(async (forceRefresh) => {
     try {
       const quoteRta = await getRandomQuote(forceRefresh)
       setQuote(quoteRta.data[0])
@@ -23,11 +21,11 @@ const TodayPage = () => {
         isClosable: true,
       })
     }
-  }
+  }, [setQuote, toast]);
 
   useEffect(() => {
     randomQuote()
-  }, [refresh])
+  }, [randomQuote])
 
   return (<>
     <QuoteCard quote={quote}></QuoteCard>
@@ -37,7 +35,7 @@ const TodayPage = () => {
       right={['16px', '84px']}
       zIndex={3}>
       <Button
-        onClick={()=>{randomQuote(true); setRefresh(!refresh)}}
+        onClick={() => { randomQuote(true); setRefresh(!refresh) }}
         size={'sm'}
         colorScheme='whatsapp'
         variant='solid'>

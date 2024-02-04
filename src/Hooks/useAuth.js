@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { loginUser, registerUser } from "../Services/authService";
 import { useLocalStorage } from "./useLocalStorage";
 import { useToast } from '@chakra-ui/react';
-import { setAuthToken } from '../Services/backService';
 
 
 

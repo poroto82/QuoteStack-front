@@ -1,8 +1,6 @@
-import { Navigate, Route, Routes, redirect } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { PublicLayout } from './Layouts/PublicLayout'
-import { ProtectedLayout } from './Layouts/ProtectedLayout'
 import LoginPage from './Pages/Login'
-import { useNavigate } from "react-router-dom";
 import RegisterPage from './Pages/Register'
 import TodayPage from './Pages/Today'
 import QuotesPage from './Pages/Quotes'

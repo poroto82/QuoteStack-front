@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Text} from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, CardFooter, Text} from "@chakra-ui/react";
 import { AddIcon, CheckIcon, MinusIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../Hooks/useAuth";
 import { deleteUserQuote, saveUserQuote, setAuthToken } from "../../Services/backService";

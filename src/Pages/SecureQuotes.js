@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo, useContext, useRef, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../Hooks/useAuth";
 import { Box, Button, useToast } from "@chakra-ui/react";
 import { getQuotes, setAuthToken } from "../Services/backService";

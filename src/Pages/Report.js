@@ -45,7 +45,7 @@ const ReportPage = () => {
                             </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4}>
-                            <TableQuotes quotes={u.quotes} sameUser={user.user.id == u.id}></TableQuotes>
+                            <TableQuotes quotes={u.quotes} deleteQuote={deleteQuote} sameUser={user.user.id === u.id}></TableQuotes>
                         </AccordionPanel>
                     </AccordionItem>
                 })}

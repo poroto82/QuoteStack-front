@@ -1,5 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from '../Hooks/useAuth';
+import { Outlet } from "react-router-dom";
 import { Menu } from "../Components/Menu/Menu";
 import { Container } from "@chakra-ui/react";
 
