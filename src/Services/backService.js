@@ -26,11 +26,20 @@ export function setAuthToken(token) {
   }
 }
 
-export function getRandomQuote() {
-  return axios.get(apiUrl + '/quotes/random');
+export function getRandomQuote(refresh = false) {
+  let url = apiUrl + '/quotes/random'
+  const params = new URLSearchParams({
+    forceRefresh: refresh
+  });
+  return axios.get(url + '?' +params.toString());
 }
 
-export function getQuotes() {
-  return axios.get(apiUrl + '/quotes');
+export function getQuotes(refresh = false, limit = 5) {
+  let url = apiUrl + '/quotes'
+  const params = new URLSearchParams({
+    forceRefresh: refresh,
+    limit: limit
+  });
+  return axios.get(url + '?' +params.toString());
 }
 

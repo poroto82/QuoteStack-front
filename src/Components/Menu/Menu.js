@@ -3,11 +3,11 @@ import { useAuth } from '../../Hooks/useAuth';
 
 import { Box, HStack, Link } from "@chakra-ui/react";
 export function Menu() {
-    const { user } = useAuth();
+    // const { user } = useAuth();
 
-    if (!user) {
-        return <Navigate to="/login" />;
-    }
+    // if (!user) {
+    //     return <Navigate to="/login" />;
+    // }
 
     return (
         <>
