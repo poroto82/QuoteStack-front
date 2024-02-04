@@ -1,8 +1,9 @@
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, Card, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from "@chakra-ui/react"
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { deleteUserQuote, getUsersAndQuotes, setAuthToken } from "../Services/backService"
 import { useAuth } from "../Hooks/useAuth"
 import { Link } from "react-router-dom"
+import TableQuotes from "../Components/TableQuotes/TableQuotes"
 
 const ReportPage = () => {
     const { user } = useAuth()
@@ -44,19 +45,7 @@ const ReportPage = () => {
                             </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4}>
-                            {u.quotes.length == 0 && <Text>There's no favourite quotes in this user.</Text>}
-                            <TableContainer>
-                                <Table size="lg" variant='striped'>
-                                    <Tbody>
-                                        {u.quotes.map(function (q) {
-                                            return <Tr>
-                                                <Td colSpan={3}>{q.text}</Td>
-                                                <Td>{user.user.id == u.id && <Button onClick={() => deleteQuote(q.id)}>Delete</Button>}</Td>
-                                            </Tr>
-                                        })}
-                                    </Tbody>
-                                </Table>
-                            </TableContainer>
+                            <TableQuotes quotes={u.quotes} sameUser={user.user.id == u.id}></TableQuotes>
                         </AccordionPanel>
                     </AccordionItem>
                 })}

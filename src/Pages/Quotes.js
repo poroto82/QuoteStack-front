@@ -2,7 +2,7 @@ import React, { useEffect, useState, memo, useContext, useRef, useCallback } fro
 import { useAuth } from "../Hooks/useAuth";
 import { Box, Button, useToast } from "@chakra-ui/react";
 import { getQuotes } from "../Services/backService";
-import QuoteCard from "../Components/Quote/Quote";
+import QuoteCard from "../Components/QuoteCard/QuoteCard";
 
 const QuotesPage = () => {
   const { user } = useAuth()
