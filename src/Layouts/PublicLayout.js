@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import { Menu } from "../Components/Menu/Menu";
 import { Container } from "@chakra-ui/react";
 
-
 export function PublicLayout() {
 
   return <>

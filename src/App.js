@@ -8,6 +8,7 @@ import SecureQuotesPage from './Pages/SecureQuotes'
 import { useAuth } from './Hooks/useAuth';
 import FavouriteQuotesPage from './Pages/FavouriteQuotes';
 import ReportPage from './Pages/Report';
+import ApiTestPage from './Pages/ApiTest'
 
 function App() {
   const { user } = useAuth();
@@ -18,6 +19,7 @@ function App() {
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="/" element={<Navigate to="/today" />} />
+      
 
       <Route path='/' element={<PublicLayout />}>
         <Route path="today" element={<TodayPage />} />
@@ -25,6 +27,7 @@ function App() {
         <Route path="secure-quotes" element={(user) ?  <SecureQuotesPage /> : <Navigate to="/quotes" />} />
         <Route path="favorite-quotes" element={(user) ?  <FavouriteQuotesPage /> : <Navigate to="/quotes" />} />
         <Route path="report-favorite-quotes" element={(user) ?  <ReportPage /> : <Navigate to="/quotes" />} />
+        <Route path="api-test" element={(user) ?  <ApiTestPage /> : <Navigate to="/login" />} />
       </Route>
 
     </Routes>
