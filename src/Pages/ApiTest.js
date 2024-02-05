@@ -11,7 +11,7 @@ import {
     SimpleGrid,
 } from '@chakra-ui/react'
 import ApiTestContent from '../Components/ApiTestContent/ApiTestContent'
-import { loginUser, registerUser } from '../Services/authService'
+import { loginUser, registerUser } from '../Services/backService'
 import { deleteUserQuote, getQuotes, getUserQuotes, getUsersAndQuotes, saveUserQuote } from '../Services/backService'
 
 const ApiTestPage = () => {

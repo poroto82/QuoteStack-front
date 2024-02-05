@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useNavigate } from "react-router-dom";
-import { loginUser, registerUser } from "../Services/authService";
+import { loginUser, registerUser } from "../Services/backService";
 import { useLocalStorage } from "./useLocalStorage";
 import { useToast } from '@chakra-ui/react';
 
