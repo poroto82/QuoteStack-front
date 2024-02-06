@@ -4,66 +4,77 @@ import {
     AccordionButton,
     AccordionPanel,
     AccordionIcon,
-    Box,
-    Input,
-    Button,
-    Grid,
-    SimpleGrid,
+    Box
 } from '@chakra-ui/react'
 import ApiTestContent from '../Components/ApiTestContent/ApiTestContent'
-import { loginUser, registerUser } from '../Services/backService'
-import { deleteUserQuote, getQuotes, getUserQuotes, getUsersAndQuotes, saveUserQuote } from '../Services/backService'
+import { useAuth } from '../Hooks/useAuth'
+
 
 const ApiTestPage = () => {
+    const { user } = useAuth()
 
     const routes = [
         {
+            urlShow: "/api/register",
             url: "/api/register",
-            method: "POST",
-            inputs: ['name', 'email', 'password'],
-            methodEx: registerUser,
+            method: "post",
+            form: ['name', 'email', 'password'],
+            params: [],
+            queryParams:[],
             useToken: false
         },
         {
+            urlShow: "/api/login",
             url: "/api/login",
-            method: "POST",
-            inputs: ['email', 'password'],
-            methodEx: loginUser,
+            method: "post",
+            form: ['email', 'password'],
+            params: [],
+            queryParams:[],
             useToken: false
         },
         {
-            url: "/api/quotes/{mode}   EMPTY|random",
-            method: "GET",
-            inputs: ['mode','limit','new'],
-            methodEx: getQuotes,
+            urlShow: "/api/quotes/{MODE}  Empty|quotes|random",
+            url: "/api/quotes",
+            method: "get",
+            form: [],
+            params: ['mode'],
+            queryParams:['limit','new'],
             useToken: true
         },
         {
+            urlShow: "/api/user/quotes",
             url: "/api/user/quotes",
-            method: "GET",
-            inputs: [],
-            methodEx: getUserQuotes,
+            method: "get",
+            form: [],
+            params: [],
+            queryParams:[],
             useToken: true
         },
         {
+            urlShow: "/api/user/quotes",
             url: "/api/user/quotes",
-            method: "POST",
-            inputs: [],
-            methodEx: saveUserQuote,
+            method: "post",
+            form: [],
+            params: [],
+            queryParams:[],
             useToken: true
         },
         {
-            url: "/api/user/quotes/{id}",
+            urlShow: "/api/user/quotes/{id}",
+            url: "/api/user/quotes",
             method: "DELETE",
-            inputs: ['id'],
-            methodEx: deleteUserQuote,
+            form: [],
+            params: ['id'],
+            queryParams:[],
             useToken: true
         },
         {
+            urlShow: "/api/users",
             url: "/api/users",
-            method: "GET",
-            inputs: [],
-            methodEx: getUsersAndQuotes,
+            method: "get",
+            form: [],
+            params: [],
+            queryParams:[],
             useToken: true
         },
     ]
@@ -81,13 +92,13 @@ const ApiTestPage = () => {
                         <h2>
                             <AccordionButton>
                                 <Box as="span" flex='1' textAlign='left'>
-                                    [{r.method}] {r.url}
+                                    [{r.method}] {r.urlShow}
                                 </Box>
                                 <AccordionIcon />
                             </AccordionButton>
                         </h2>
                         <AccordionPanel pb={4}>
-                           <ApiTestContent routeExtra={r}></ApiTestContent>
+                           <ApiTestContent tokenInit={user.token} routeExtra={r}></ApiTestContent>
                         </AccordionPanel>
                     </AccordionItem>
                     })

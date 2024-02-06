@@ -1,41 +1,62 @@
-import { Box, Button, Code, Input, SimpleGrid } from "@chakra-ui/react"
-import { useAuth } from "../../Hooks/useAuth"
+import { Box, Button, Code, Input, SimpleGrid, useToast } from "@chakra-ui/react"
 import { useState } from "react"
 import { setAuthToken } from "../../Services/backService"
+import axios from "axios"
 
-const ApiTestContent = ({ routeExtra }) => {
+const ApiTestContent = ({ routeExtra, tokenInit }) => {
 
-    const { user } = useAuth()
+    
+    const toast = useToast()
 
     const [formState, setFormState] = useState({})
-    const [token, setToken] = useState({})
+    const [params, setParams] = useState({})
+    const [queryParams,setQueryParams] = useState({})
+
+    const [token, setToken] = useState(tokenInit)
     const [result, setResult] = useState("{}")
 
-    async function onSubmit(e) {
-        e.preventDefault();
+    async function sendRequest() {
         
         if (routeExtra.useToken){
             setAuthToken(token)
         }
-        const rta = await routeExtra.methodEx(Object.values(formState))
-        setResult(JSON.stringify(rta.data))
+        
+        const queryParamsStr = new URLSearchParams(queryParams);
+
+        let url = routeExtra.url + (params ? '/'+ Object.values(params).join('/') : '') +((queryParamsStr !== '') ? '?'+queryParamsStr : '')
+
+        try{
+            const rta = await axios.request({
+                url: url,
+                method: routeExtra.method,
+                data:formState
+            })
+            
+            setResult(JSON.stringify(rta.data))
+        }
+        catch(error){
+            toast({
+                title: `${error}`,
+                status: 'error',
+                isClosable: true,
+              })
+        }
     }
 
     return <SimpleGrid columns={2} spacing={10}>
         <Box>
-            <form onSubmit={onSubmit}>
+            
                 {routeExtra.useToken &&
                     <Input
                         placeholder="Api Token"
                         label="Api Token"
                         variant='outline'
-                        value={user.token}
+                        value={token}
                         onChange={(e)=>setToken(e.target.value)}
                     />
                 }
-                {routeExtra.inputs.length > 0 &&
-
-                    routeExtra.inputs.map((i, idx) => <Input
+                {routeExtra.form.length > 0 &&
+                    routeExtra.form.map((i, idx) => <Input
                         placeholder={i}
                         label={i}
                         name={i}
@@ -44,16 +65,35 @@ const ApiTestContent = ({ routeExtra }) => {
 
                     />)
                 }
+                {routeExtra.params.length > 0 &&
+                    routeExtra.params.map((i, idx) => <Input
+                        placeholder={i}
+                        label={i}
+                        name={i}
+                        variant='outline'
+                        onChange={(e) => setParams({ ...params, [i]: e.target.value })}
 
-                <Button type="submit" colorScheme='blue' variant="solid">
+                    />)
+                }
+                {routeExtra.queryParams.length > 0 &&
+                    routeExtra.queryParams.map((i, idx) => <Input
+                        placeholder={i}
+                        label={i}
+                        name={i}
+                        variant='outline'
+                        onChange={(e) => setQueryParams({ ...queryParams, [i]: e.target.value })}
+
+                    />)
+                }
+
+                <Button onClick={sendRequest} colorScheme='blue' variant="solid">
                     send
                 </Button>
-            </form>
+            
 
         </Box>
         <Box>
             <Code>{result}</Code>
-
         </Box>
     </SimpleGrid>
 }
