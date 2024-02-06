@@ -10,11 +10,14 @@ const SecureQuotesPage = () => {
 
   const [quotes, setQuotes] = useState([])
   const [refresh, setRefresh] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const getSecureQuotes = useCallback(async (forceRefresh) => {
+    setLoaded(false)
     try{
       const quoteRta = await getQuotes(forceRefresh,10)
       setQuotes(quoteRta.data)
+      setLoaded(true)
     }
     catch(error){
       toast({
@@ -34,7 +37,7 @@ const SecureQuotesPage = () => {
   return (
     <>
     {quotes.map(function (i) {
-      return <QuoteCard quote={i}></QuoteCard>;
+      return <QuoteCard isLoaded={loaded} quote={i}></QuoteCard>;
     })}
     <Box
         onClick={()=>{getSecureQuotes(true); setRefresh(!refresh);}}

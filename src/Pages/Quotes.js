@@ -6,11 +6,14 @@ import QuoteCard from "../Components/QuoteCard/QuoteCard";
 const QuotesPage = () => {
   const toast = useToast()
   const [quotes, setQuotes] = useState([])
+  const [loaded, setLoaded] = useState(false)
 
   const gquotes = useCallback (async (forceRefresh) => {
+    setLoaded(false)
     try {
       const quoteRta = await getQuotes(forceRefresh)
       setQuotes(quoteRta.data)
+      setLoaded(true)
     }
     catch (error) {
       toast({
@@ -29,7 +32,7 @@ const QuotesPage = () => {
   return (
     <>
       {quotes.map(function (i,idx) {
-        return <QuoteCard key={idx} quote={i}></QuoteCard>;
+        return <QuoteCard isLoaded={loaded} key={idx} quote={i}></QuoteCard>;
       })}
       <Box
         onClick={()=>{gquotes(true)}}

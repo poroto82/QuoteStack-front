@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Box, Button, Card, CardBody, CardFooter, Text} from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, CardFooter, Skeleton, Text} from "@chakra-ui/react";
 import { AddIcon, CheckIcon, MinusIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../Hooks/useAuth";
 import { deleteUserQuote, saveUserQuote, setAuthToken } from "../../Services/backService";
 
-const QuoteCard = ({quote, addToFav = true, deleteFav = false, setRefresh }) => {
+const QuoteCard = ({quote, addToFav = true, deleteFav = false, setRefresh, isLoaded }) => {
   const { user } = useAuth()
 
   const [saved, setSaved] = useState(false)
@@ -28,6 +28,7 @@ const QuoteCard = ({quote, addToFav = true, deleteFav = false, setRefresh }) => 
       boxShadow='lg'
       rounded='md'
     >
+    <Skeleton isLoaded={isLoaded}>
     <Card>
       <CardBody>
         <Text>{quote.cached ? ' [CACHE] ' : ''}{quote.text}</Text>
@@ -46,6 +47,7 @@ const QuoteCard = ({quote, addToFav = true, deleteFav = false, setRefresh }) => 
         }
       </CardFooter>}
     </Card>
+    </Skeleton>
     </Box>
   );
 };

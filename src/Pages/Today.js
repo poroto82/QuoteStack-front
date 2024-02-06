@@ -8,11 +8,14 @@ const TodayPage = () => {
 
   const [quote, setQuote] = useState({})
   const [refresh, setRefresh] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const randomQuote = useCallback(async (forceRefresh) => {
+    setLoaded(false)
     try {
       const quoteRta = await getRandomQuote(forceRefresh)
       setQuote(quoteRta.data[0])
+      setLoaded(true)
     }
     catch (error) {
       toast({
@@ -28,7 +31,7 @@ const TodayPage = () => {
   }, [randomQuote])
 
   return (<>
-    <QuoteCard quote={quote}></QuoteCard>
+    <QuoteCard isLoaded={loaded} quote={quote}></QuoteCard>
     <Box
       position='fixed'
       bottom='20px'

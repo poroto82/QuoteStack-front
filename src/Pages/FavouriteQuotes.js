@@ -10,8 +10,10 @@ const FavouriteQuotesPage = () => {
 
   const [quotes, setQuotes] = useState([])
   const [refresh, setRefresh] = useState(0)
+  const [loaded, setLoaded] = useState(false)
   
   const getSecureQuotes = useCallback(async () => {
+    setLoaded(false)
     try{
       const quoteRta = await getUserQuotes()
       setQuotes(quoteRta.data)
@@ -21,7 +23,7 @@ const FavouriteQuotesPage = () => {
           status: 'info'
         })
       }
-
+      setLoaded(true)
     }
     catch(error){
       toast({
@@ -41,7 +43,7 @@ const FavouriteQuotesPage = () => {
   return (
     <>
     {quotes.map(function (i, idx) {
-      return <QuoteCard key={idx} deleteFav={true} setRefresh={setRefresh} quote={i} addToFav={false}></QuoteCard>;
+      return <QuoteCard key={idx} isLoaded={loaded} deleteFav={true} setRefresh={setRefresh} quote={i} addToFav={false}></QuoteCard>;
     })}
     </>
   );
