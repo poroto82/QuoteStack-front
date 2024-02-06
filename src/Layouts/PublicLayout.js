@@ -9,7 +9,7 @@ export function PublicLayout() {
     <Container 
       maxWidth="xg" 
       minHeight="90vh"
-      bg="#f5f5f5"
+      
       display="flex"
       flexDirection="column"
       justifyContent="center"

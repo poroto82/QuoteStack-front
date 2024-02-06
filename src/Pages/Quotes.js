@@ -39,7 +39,7 @@ const QuotesPage = () => {
         zIndex={3}>
         <Button
           size={'sm'}
-          colorScheme='whatsapp'
+          colorScheme='blue'
           variant='solid'>
           Force Refresh
         </Button>

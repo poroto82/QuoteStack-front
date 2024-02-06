@@ -1,0 +1,51 @@
+body {
+    background: linear-gradient(245deg, #21c198, #23a9b0);
+    background-size: 400% 400%;
+
+    -webkit-animation: timeme 25s ease infinite;
+    -moz-animation: timeme 25s ease infinite;
+    animation: timeme 25s ease infinite;
+}
+
+
+@-webkit-keyframes timeme {
+    0% {
+        background-position: 0% 41%
+    }
+
+    50% {
+        background-position: 100% 60%
+    }
+
+    100% {
+        background-position: 0% 41%
+    }
+}
+
+@-moz-keyframes timeme {
+    0% {
+        background-position: 0% 41%
+    }
+
+    50% {
+        background-position: 100% 60%
+    }
+
+    100% {
+        background-position: 0% 41%
+    }
+}
+
+@keyframes timeme {
+    0% {
+        background-position: 0% 41%
+    }
+
+    50% {
+        background-position: 100% 60%
+    }
+
+    100% {
+        background-position: 0% 41%
+    }
+}

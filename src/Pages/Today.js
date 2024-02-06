@@ -37,7 +37,7 @@ const TodayPage = () => {
       <Button
         onClick={() => { randomQuote(true); setRefresh(!refresh) }}
         size={'sm'}
-        colorScheme='whatsapp'
+        colorScheme='blue'
         variant='solid'>
         Force Refresh
       </Button>
