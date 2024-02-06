@@ -4,8 +4,6 @@ import { setAuthToken } from "../../Services/backService"
 import axios from "axios"
 
 const ApiTestContent = ({ routeExtra, tokenInit }) => {
-
-    
     const toast = useToast()
 
     const [formState, setFormState] = useState({})
@@ -57,6 +55,7 @@ const ApiTestContent = ({ routeExtra, tokenInit }) => {
                 }
                 {routeExtra.form.length > 0 &&
                     routeExtra.form.map((i, idx) => <Input
+                        key={idx}    
                         placeholder={i}
                         label={i}
                         name={i}
@@ -67,6 +66,7 @@ const ApiTestContent = ({ routeExtra, tokenInit }) => {
                 }
                 {routeExtra.params.length > 0 &&
                     routeExtra.params.map((i, idx) => <Input
+                        key={idx}
                         placeholder={i}
                         label={i}
                         name={i}
@@ -77,6 +77,7 @@ const ApiTestContent = ({ routeExtra, tokenInit }) => {
                 }
                 {routeExtra.queryParams.length > 0 &&
                     routeExtra.queryParams.map((i, idx) => <Input
+                        key={idx}
                         placeholder={i}
                         label={i}
                         name={i}

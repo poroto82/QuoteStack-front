@@ -87,8 +87,8 @@ const ApiTestPage = () => {
         >
             <Accordion>
                 {
-                    routes.map(r => {
-                        return <AccordionItem>
+                    routes.map((r,idx) => {
+                        return <AccordionItem key={idx}>
                         <h2>
                             <AccordionButton>
                                 <Box as="span" flex='1' textAlign='left'>
