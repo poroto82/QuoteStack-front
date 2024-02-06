@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../Hooks/useAuth'
-import { Box, Input, Button, Link, Stack, Text } from '@chakra-ui/react'
+import { Box, Input, Button, Stack, Text } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 function RegisterPage() {
   const [formState, setFormState] = useState({
@@ -72,7 +73,7 @@ function RegisterPage() {
               Register
             </Button>
           </Stack>
-          <Link mt="4" href="/login">
+          <Link mt="4" to="/login">
             Already registered? Login
           </Link>
 
